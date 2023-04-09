@@ -1,0 +1,19 @@
+.popup__button-exit {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    right: -33px;
+    top: -33px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url(../../../images/Close.png);
+}
+
+@media screen and (max-width:767px) {
+    .popup__button-exit {
+        right: 0;
+        width: 22px;
+        background-size: cover;
+        height: 22px;
+    }
+}

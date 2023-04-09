@@ -1,0 +1,15 @@
+.element__main-vector {
+    background-image: url(../../../images/Vector.svg);
+    width: 22px;
+    height: 19px;
+    margin-right: 2px;
+    margin-top: 5px;
+}
+
+.element__main-vector:hover {
+    background-image: url(../../../images/Union.svg);
+}
+
+.element__main-vector:after {
+    background-image: url(../../../images/Vector.svg);
+}
