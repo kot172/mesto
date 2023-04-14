@@ -1,4 +1,4 @@
-.profile__addButton {
+.profile__add-Button {
     width: 150px;
     max-height: 50px;
     margin-left: auto;
@@ -7,7 +7,7 @@
 }
 
 @media screen and (max-width:767px) {
-    .profile__addButton {
+    .profile__add-Button {
         margin: 20px auto 0;
         width: 282px;
         height: 50px;

@@ -1,8 +1,8 @@
-.popup__job {
-    border: 1px solid rgba(84, 84, 84, 0.7);
-    width: 80%;
+.popup__field {
+    border: 1px solid rgba(84, 84, 84, 0.2);
+    max-width: 358px;
     min-height: 27px;
-    font-family: 'Inter';
+    font-family: 'Inter', ‘Arial’, sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -10,4 +10,6 @@
     border-top-style: none;
     border-left-style: none;
     border-right-style: none;
+    margin-top: 27px;
+    padding-bottom: 3px;
 }

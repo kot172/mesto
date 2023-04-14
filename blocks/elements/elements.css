@@ -6,13 +6,13 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
     grid-template-rows: repeat(2, 361px);
-
+    justify-items: center;
 }
 
 
 @media screen and (max-width:767px) {
     .elements {
-        margin: 36px auto 0;
+        margin: 51px auto 0;
         width: 282px;
     }
 }
