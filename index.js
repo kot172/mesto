@@ -1,4 +1,4 @@
-const editButton = document.querySelector('.profile__edit-Button') // Клавиша редактирования
+const editButton = document.querySelector('.profile__edit-button') // Клавиша редактирования
 
 // Находим форму в DOM
 let formElement = document.querySelector('.popup')

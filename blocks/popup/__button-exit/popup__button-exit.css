@@ -18,3 +18,7 @@
         height: 22px;
     }
 }
+
+.popup__button-exit:hover {
+    opacity:0.6;
+}
