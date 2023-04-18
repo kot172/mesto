@@ -10,7 +10,7 @@ let name = document.querySelector('.profile__name')
 let job = document.querySelector('.profile__job')
 
 // Находим поля формы в DOM
-function showPopup (evt) {
+function showPopup () {
     formElement.classList.add('popup_opened')
     nameInput.value = name.textContent   // вставили имя
     jobInput.value = job.textContent //вставили джоб
@@ -19,7 +19,7 @@ editButton.addEventListener('click', showPopup);
 
 // закрытие
 const closeButton = document.querySelector('.popup__button-exit')
-function exitButton (evt) {
+function exitButton () {
     formElement.classList.remove('popup_opened') 
 }
 closeButton.addEventListener('click', exitButton);
