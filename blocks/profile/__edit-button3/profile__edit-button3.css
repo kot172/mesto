@@ -4,8 +4,8 @@
     margin: 15px auto 0;
     background-image: url(../../../images/EditButton.svg);
     width: 24px;
-    border: none;
     background-size: 100%;
+    border: none;
     background-color: rgba(0, 0, 0, 0);
 }
 
@@ -19,5 +19,5 @@
 }
 
 .profile__edit-button:hover {
-    opacity:0.6;
+    opacity: 0.6;
 }
