@@ -27,7 +27,7 @@
 
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/element/element.css);
-@import url(../blocks/element/__mask-group/element__Mask-Group.css);
+@import url(../blocks/element/__mask-group/element__mask-group.css);
 @import url(../blocks/element/__main/element__main.css);
 @import url(../blocks/element/__main-text/element__main-text.css);
 @import url(../blocks/element/__main-vector/element__main-vector.css);
