@@ -1,5 +1,6 @@
 .profile__rectangle-vector {
     margin-top: 5px;
+    cursor: pointer;
 }
 
 @media screen and (max-width:767px) {
