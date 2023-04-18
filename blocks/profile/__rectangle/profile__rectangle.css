@@ -7,6 +7,7 @@
     margin-top: 35px;
     background-color: #000000;
     border-radius: 2px;
+    cursor: pointer;
 }
 
 @media screen and (max-width:767px) {
@@ -18,5 +19,5 @@
 }
 
 .profile__rectangle:hover {
-    opacity:0.6;
+    opacity: 0.6;
 }
