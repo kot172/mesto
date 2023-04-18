@@ -3,15 +3,15 @@ const editButton = document.querySelector('.profile__edit-button') // Клави
 // Находим форму в DOM
 let formElement = document.querySelector('.popup')
 
-let nameInput = document.querySelector('.popup__field_name') // Воспользуйтесь инструментом .querySelector()
-let jobInput = document.querySelector('.popup__field_job') // Воспользуйтесь инструментом .querySelector()
+let nameInput = document.querySelector('.popup__field_type_name') // Воспользуйтесь инструментом .querySelector()
+let jobInput = document.querySelector('.popup__field_type_job') // Воспользуйтесь инструментом .querySelector()
 
 let name = document.querySelector('.profile__name')
 let job = document.querySelector('.profile__job')
 
 // Находим поля формы в DOM
 function showPopup (evt) {
-    formElement.classList.add('popup__opened')
+    formElement.classList.add('popup_opened')
     nameInput.value = name.textContent   // вставили имя
     jobInput.value = job.textContent //вставили джоб
 } 
@@ -20,7 +20,7 @@ editButton.addEventListener('click', showPopup);
 // закрытие
 const closeButton = document.querySelector('.popup__button-exit')
 function exitButton (evt) {
-    formElement.classList.remove('popup__opened') 
+    formElement.classList.remove('popup_opened') 
 }
 closeButton.addEventListener('click', exitButton);
 
