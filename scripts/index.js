@@ -42,7 +42,6 @@ closeButton.addEventListener('click', () => exitButton(formElement));
 closeButtonPlace.addEventListener('click', () => exitButton(cardPopupp));
 closePopupImages.addEventListener('click', () => exitButton(popupImages));
 
-
 function createNewCards(card) {
   const newEl = photoTemplate.content.querySelector('.element').cloneNode(true)
   const imgEl = newEl.querySelector('.element__mask-group')
@@ -50,6 +49,7 @@ function createNewCards(card) {
   const deleteButton = newEl.querySelector('.element__delete')
   const likeButton = newEl.querySelector('.element__main-vector') // Клавиша лайка
   titleEl.textContent = card.name
+  imgEl.alt = card.name
   imgEl.src = card.link
 
   const handleDeleteImage = () => {
@@ -71,7 +71,6 @@ initialCards.forEach((card) => {
   const element = createNewCards(card)
   gridPhoto.appendChild(element)
 })
-
 
 function handleFormSubmit(evt) {
   evt.preventDefault();
