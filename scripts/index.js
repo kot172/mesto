@@ -51,6 +51,7 @@ function createNewCards(card) {
   titleEl.textContent = card.name
   imgEl.alt = card.name
   imgEl.src = card.link
+  document.getElementById('CardProfile').reset();
 
   const handleDeleteImage = () => {
     newEl.remove()
