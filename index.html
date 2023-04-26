@@ -29,45 +29,8 @@
 
             </section>
 
+            <section class="elements"></section>
 
-            <section class="elements">
-
-                <!-- <article class="element">
-                    <img class="element__mask-group" src="./images/Elbrus.png" alt="Ельбрус">
-                    <div class="element__main">
-                        <h2 class="element__main-text">Гора Эльбрус</h2>
-                        <button type="button" class="element__main-vector"> </button>
-                    </div>
-                </article>
-                <article class="element">
-                    <img class="element__mask-group" src="./images/Dombai.png" alt="Домбай">
-                    <div class="element__main">
-                        <h2 class="element__main-text">Домбай</h2>
-                        <button type="button" class="element__main-vector"> </button>
-                    </div>
-                </article>
-                <article class="element">
-                    <img class="element__mask-group" src="./images/Elbrus.png" alt="Ельбрус">
-                    <div class="element__main">
-                        <h2 class="element__main-text">Гора Эльбрус</h2>
-                        <button type="button" class="element__main-vector"> </button>
-                    </div>
-                </article>
-                <article class="element">
-                    <img class="element__mask-group" src="./images/Dombai.png" alt="Домбай">
-                    <div class="element__main">
-                        <h2 class="element__main-text">Домбай</h2>
-                        <button type="button" class="element__main-vector"> </button>
-                    </div>
-                </article>
-                <article class="element">
-                    <img class="element__mask-group" src="./images/Karachaevsk.png" alt="Карачаевск">
-                    <div class="element__main">
-                        <h2 class="element__main-text">Карачаево-Ч...</h2>
-                        <button type="button" class="element__main-vector"> </button>
-                    </div>
-                </article> -->
-            </section>
         </main>
         <footer class="footer">
             <p class="footer__info">&#169; 2020 Mesto Russia</p>
@@ -90,32 +53,34 @@
             <div class="popup__container">
                 <button class="popup__button-exit" type="button"></button>
                 <h2 class="popup__heading">Новое место</h2>
-                <form name="cardProfile" class="popup__info">
-                    <input placeholder="Название" name="place" class="popup__field popup__field_type_place">
-                    <input placeholder="Ссылка на картинку" name="link" class="popup__field popup__field_type_link">
-                    <button type="submit" class="popup__button-save">Сохранить</button>
+                <form name="cardProfile" class="popup__info"></form>
+                <input placeholder="Название" name="place" class="popup__field popup__field_type_place">
+                <input placeholder="Ссылка на картинку" name="link" class="popup__field popup__field_type_link">
+                <button type="submit" class="popup__button-save">Сохранить</button>
             </div>
         </div>
 
         <div class="popup images-popup">
             <div class="popup__container popup__container_image">
-              <button class="popup__button-exit popup__button-exit_image" type="button" ></button>
-              <img class="popup__image" alt="изображение">
-              <h2 class="popup__heading popup__heading_image"></h2>
+                <button class="popup__button-exit popup__button-exit_image" type="button"></button>
+                <img class="popup__image" alt="изображение">
+                <h2 class="popup__heading popup__heading_image"></h2>
             </div>
-          </div>
+        </div>
 
 
+
+        <template class="element_template">
+            <div class="element">
+                <img class="element__mask-group" alt="Изображение">
+                <button type="button" class="element__delete"><img src="./images/Trash.svg"></button>
+                <div class="element__main">
+                    <h2 class="element__main-text">Карачаевск</h2>
+                    <button type="button" class="element__main-vector"> </button>
+                </div>
+            </div>
+        </template>
     </div>
-    <template class="element_template">
-        <div class="element">
-            <img class="element__mask-group"  alt="Изображение">
-            <button type="button" class="element__delete"><img src="./images/Trash.svg"></button>
-            <div class="element__main">
-                <h2 class="element__main-text">Карачаевск</h2>
-                <button type="button" class="element__main-vector"> </button>
-            </div>
-    </template></div>
     <script src="scripts/constants.js"></script>
     <script src="scripts/index.js"></script>
 </body>
