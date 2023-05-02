@@ -8,10 +8,10 @@ const popupImagesParagraph = popupImages.querySelector('.popup__heading');
 // Находим форму в DOM
 let formElement = document.querySelector('.profile-popup')  // Нашел форму с именем и фамилией
 let cardPopupp = document.querySelector('.photo-popup')  // Нашел форму с добавлением картинок
-let closeButtonPlace = cardPopupp.querySelector('.popup__button-exit') // клавиша закрытия попапа
-let gridPhoto = document.querySelector('.elements')  // Нашли блок фото
+const closeButtonPlace = cardPopupp.querySelector('.popup__button-exit') // клавиша закрытия попапа
+const gridPhoto = document.querySelector('.elements')  // Нашли блок фото
 let photoTemplate = document.querySelector('.element_template') // Нашли card
-let likeCard = document.querySelector('.element__main-vector') // Нашли like
+const likeCard = document.querySelector('.element__main-vector') // Нашли like
 let nameInput = document.querySelector('.popup__field_type_name')
 let jobInput = document.querySelector('.popup__field_type_job')
 let placeInput = document.querySelector('.popup__field_type_place')
@@ -34,13 +34,13 @@ addButton.addEventListener('click', () => {
 })
 
 // закрытие
-const closeButton = document.querySelector('.popup__button-exit')
-function exitButton(popupElement) {
+const closeButton = formElement.querySelector('.popup__button-exit')
+function hidePopup(popupElement) {
   popupElement.classList.remove('popup_opened')
 }
-closeButton.addEventListener('click', () => exitButton(formElement));
-closeButtonPlace.addEventListener('click', () => exitButton(cardPopupp));
-closePopupImages.addEventListener('click', () => exitButton(popupImages));
+closeButton.addEventListener('click', () => hidePopup(formElement));
+closeButtonPlace.addEventListener('click', () => hidePopup(cardPopupp));
+closePopupImages.addEventListener('click', () => hidePopup(popupImages));
 
 function createNewCards(card) {
   const newEl = photoTemplate.content.querySelector('.element').cloneNode(true)
@@ -73,21 +73,21 @@ initialCards.forEach((card) => {
   gridPhoto.appendChild(element)
 })
 
-function handleFormSubmit(evt) {
+function handleProfileFormSubmit (evt) {
   evt.preventDefault();
-  name.textContent = nameInput.value
-  job.textContent = jobInput.value
-  exitButton()
+  name.textContent = nameInput.value;
+  job.textContent = jobInput.value;
+  hidePopup(formElement);
 }
 
-formElement.addEventListener('submit', handleFormSubmit);
+formElement.addEventListener('submit', handleProfileFormSubmit);
 
 cardPopupp.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const groupCard = { name: placeInput.value, link: linkInput.value }
   const element = createNewCards(groupCard)
   gridPhoto.prepend(element)
-  exitButton(cardPopupp)
+  hidePopup(cardPopupp)
 })
 
 const openPopupImage = (card) => {
