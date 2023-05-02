@@ -33,7 +33,7 @@
 @import url(../blocks/element/__main/element__main.css);
 @import url(../blocks/element/__main-text/element__main-text.css);
 @import url(../blocks/element/__main-vector/element__main-vector.css);
-@import url(../blocks/element/__main-vector/element__main-vector_active/element__main-vector_active.css);
+@import url(../blocks/element/__main-vector/_active/element__main-vector_active.css);
 @import url(../blocks/element/__delete/element__delete.css);
 
 @import url(../blocks/footer/footer.css);

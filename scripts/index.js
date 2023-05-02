@@ -6,9 +6,9 @@ const popupImagesContent = popupImages.querySelector('.popup__image');
 const popupImagesParagraph = popupImages.querySelector('.popup__heading');
 
 // Находим форму в DOM
-let formElement = document.querySelector('.profile-popup')  // Нашел форму с именем и фамилией
+const formElement = document.querySelector('.profile-popup')  // Нашел форму с именем и фамилией
 let cardPopupp = document.querySelector('.photo-popup')  // Нашел форму с добавлением картинок
-const closeButtonPlace = cardPopupp.querySelector('.popup__button-exit') // клавиша закрытия попапа
+const closeButtonPlace = cardPopupp.querySelector('.popup_type_edit-card') // клавиша закрытия попапа
 const gridPhoto = document.querySelector('.elements')  // Нашли блок фото
 let photoTemplate = document.querySelector('.element_template') // Нашли card
 const likeCard = document.querySelector('.element__main-vector') // Нашли like
@@ -34,7 +34,7 @@ addButton.addEventListener('click', () => {
 })
 
 // закрытие
-const closeButton = formElement.querySelector('.popup__button-exit')
+const closeButton = formElement.querySelector('.popup_type_edit-profile')
 function hidePopup(popupElement) {
   popupElement.classList.remove('popup_opened')
 }
