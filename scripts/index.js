@@ -7,17 +7,17 @@ const popupImagesParagraph = popupImages.querySelector('.popup__heading');
 
 // Находим форму в DOM
 const formElement = document.querySelector('.profile-popup')  // Нашел форму с именем и фамилией
-let cardPopupp = document.querySelector('.photo-popup')  // Нашел форму с добавлением картинок
+const cardPopupp = document.querySelector('.photo-popup')  // Нашел форму с добавлением картинок
 const closeButtonPlace = cardPopupp.querySelector('.popup__button-exit_card') // клавиша закрытия попапа
 const gridPhoto = document.querySelector('.elements')  // Нашли блок фото
-let photoTemplate = document.querySelector('.element_template') // Нашли card
+const photoTemplate = document.querySelector('.element_template') // Нашли card
 const likeCard = document.querySelector('.element__main-vector') // Нашли like
-let nameInput = document.querySelector('.popup__field_type_name')
-let jobInput = document.querySelector('.popup__field_type_job')
-let placeInput = document.querySelector('.popup__field_type_place')
-let linkInput = document.querySelector('.popup__field_type_link')
-let name = document.querySelector('.profile__name')
-let job = document.querySelector('.profile__job')
+const nameInput = document.querySelector('.popup__field_type_name')
+const jobInput = document.querySelector('.popup__field_type_job')
+const placeInput = document.querySelector('.popup__field_type_place')
+const linkInput = document.querySelector('.popup__field_type_link')
+const name = document.querySelector('.profile__name')
+const job = document.querySelector('.profile__job')
 
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened')
