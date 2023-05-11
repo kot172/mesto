@@ -1,7 +1,10 @@
+import { activateButton, disableButton } from './validate.js'
+import { initialCards } from './constants.js';
 const editButton = document.querySelector('.profile__edit-button') // Клавиша редактирования
 const addButton = document.querySelector('.profile__rectangle')  // Клавиша добавления
 const popupImages = document.querySelector('.images-popup');
 const closePopupImages = popupImages.querySelector('.popup__button-exit_image');
+const buttonSave = document.querySelector('.popup__button-save')
 const popupImagesContent = popupImages.querySelector('.popup__image');
 const popupImagesParagraph = popupImages.querySelector('.popup__heading');
 
@@ -21,27 +24,50 @@ const job = document.querySelector('.profile__job')
 
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened')
+  popupElement.addEventListener('click', handlePopupClick);
+  document.addEventListener('keydown', handleEscPress);
+}
+
+const handlePopupClick = (evt) => {
+  const openedPopup = document.querySelector('.popup_opened');
+  if (evt.target === openedPopup) {
+    hidePopup(openedPopup);
+  }
+};
+const handleEscPress = (evt) => {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    hidePopup(openedPopup);
+  }
+};
+
+// закрытие
+const closeButton = formElement.querySelector('.popup__button-exit_profile')
+function hidePopup(popupElement) {
+  popupElement.classList.remove('popup_opened');
+  popupElement.removeEventListener('click', handlePopupClick);
+  document.removeEventListener('keydown', handleEscPress);
 }
 
 editButton.addEventListener('click', () => {
   openPopup(formElement)
+  activateButton(formElement.querySelector('.popup__button-save'), { inactiveButtonClass: 'popup__button_disabled' })
   nameInput.value = name.textContent   // вставили имя
   jobInput.value = job.textContent //вставили джоб
 });
 
 addButton.addEventListener('click', () => {
   openPopup(cardPopupp)
+  disableButton(cardPopupp.querySelector('.popup__button-save'), { inactiveButtonClass: 'popup__button_disabled' })
 })
 
-// закрытие
-const closeButton = formElement.querySelector('.popup__button-exit_profile')
-function hidePopup(popupElement) {
-  popupElement.classList.remove('popup_opened')
-}
 closeButton.addEventListener('click', () => hidePopup(formElement));
 closeButtonPlace.addEventListener('click', () => hidePopup(cardPopupp));
 closePopupImages.addEventListener('click', () => hidePopup(popupImages));
-
+const resetFormInputs = () => {
+  placeInput.value = ''
+  linkInput.value = ''
+}
 function createNewCards(card) {
   const newEl = photoTemplate.content.querySelector('.element').cloneNode(true)
   const imgEl = newEl.querySelector('.element__mask-group')
@@ -73,7 +99,7 @@ initialCards.forEach((card) => {
   gridPhoto.appendChild(element)
 })
 
-function handleProfileFormSubmit (evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   name.textContent = nameInput.value;
   job.textContent = jobInput.value;
