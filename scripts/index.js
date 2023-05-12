@@ -18,6 +18,7 @@ const likeCard = document.querySelector('.element__main-vector') // Нашли l
 const nameInput = document.querySelector('.popup__field_type_name')
 const jobInput = document.querySelector('.popup__field_type_job')
 const placeInput = document.querySelector('.popup__field_type_place')
+const addCardsForm = document.forms['cardProfile']
 const linkInput = document.querySelector('.popup__field_type_link')
 const name = document.querySelector('.profile__name')
 const job = document.querySelector('.profile__job')
@@ -29,7 +30,7 @@ function openPopup(popupElement) {
 }
 
 const handlePopupClick = (evt) => {
-  const openedPopup = document.querySelector('.popup_opened');
+  const openedPopup = evt.currentTarget;
   if (evt.target === openedPopup) {
     hidePopup(openedPopup);
   }
@@ -57,6 +58,7 @@ editButton.addEventListener('click', () => {
 });
 
 addButton.addEventListener('click', () => {
+  addCardsForm.reset()
   openPopup(cardPopupp)
   disableButton(cardPopupp.querySelector('.popup__button-save'), { inactiveButtonClass: 'popup__button_disabled' })
 })
@@ -64,11 +66,8 @@ addButton.addEventListener('click', () => {
 closeButton.addEventListener('click', () => hidePopup(formElement));
 closeButtonPlace.addEventListener('click', () => hidePopup(cardPopupp));
 closePopupImages.addEventListener('click', () => hidePopup(popupImages));
-const resetFormInputs = () => {
-  placeInput.value = ''
-  linkInput.value = ''
-}
-function createNewCards(card) {
+
+function createNewCard(card) {
   const newEl = photoTemplate.content.querySelector('.element').cloneNode(true)
   const imgEl = newEl.querySelector('.element__mask-group')
   const titleEl = newEl.querySelector('.element__main-text')
@@ -95,7 +94,7 @@ function createNewCards(card) {
 }
 
 initialCards.forEach((card) => {
-  const element = createNewCards(card)
+  const element = createNewCard(card)
   gridPhoto.appendChild(element)
 })
 
@@ -111,7 +110,7 @@ formElement.addEventListener('submit', handleProfileFormSubmit);
 cardPopupp.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const groupCard = { name: placeInput.value, link: linkInput.value }
-  const element = createNewCards(groupCard)
+  const element = createNewCard(groupCard)
   gridPhoto.prepend(element)
   hidePopup(cardPopupp)
 })

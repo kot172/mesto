@@ -1,23 +1,23 @@
 //Показать ошибку
-const showError = (formElement, inputElement, errorMessage) => {
+const showError = (formElement, inputElement, errorMessage, obj) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.add('popup__error-active');
+    inputElement.classList.add(obj.inputErrorClass);
     errorElement.textContent = errorMessage;
-    errorElement.classList.add('popup__error_visible');
+    errorElement.classList.add(obj.errorClass);
 };
 
-const resetError = (formElement, inputElement) => {
+const resetError = (formElement, inputElement, obj) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
 
-    inputElement.classList.remove('popup__error-active');
-    errorElement.classList.remove('popup__error_visible');
+    inputElement.classList.remove(obj.inputErrorClass);
+    errorElement.classList.remove(obj.errorClass);
     errorElement.textContent = '';
 };
-const checkValidity = (formElement, inputElement) => {
+const checkValidity = (formElement, inputElement, obj) => {
     if (!inputElement.validity.valid) {
-        showError(formElement, inputElement, inputElement.validationMessage);
+        showError(formElement, inputElement, inputElement.validationMessage, obj);
     } else {
-        resetError(formElement, inputElement);
+        resetError(formElement, inputElement, obj);
     }
 };
 
@@ -29,7 +29,7 @@ const setEventListener = (formElement, obj) => {
 
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', function () {
-            checkValidity(formElement, inputElement);
+            checkValidity(formElement, inputElement, obj);
             toggleButtonState(inputList, submitBtn, obj);
         });
     });
@@ -75,6 +75,6 @@ enableValidation({
     inputSelector: '.popup__field',
     submitButtonSelector: '.popup__button-save',
     inactiveButtonClass: 'popup__button_disabled',
-    inputErrorClass: 'popup__error',
+    inputErrorClass: 'popup__error-active',
     errorClass: 'popup__error_visible',
 });

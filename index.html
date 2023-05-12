@@ -18,10 +18,10 @@
                 <img class="profile__avatar" src="./images/profile.png" alt="аватарка">
                 <div class="profile__info">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
-                    <button type="button" class="profile__edit-button"></button>
+                    <button type="button" aria-label="edit" class="profile__edit-button"></button>
                     <p class="profile__job">Исследователь океана</p>
                 </div>
-                <button type="button" class="profile__rectangle"><img class="profile__rectangle-vector"
+                <button type="button" aria-label="add" class="profile__rectangle"><img class="profile__rectangle-vector"
                         src="./images/Button.svg" alt="кнопка"></button>
             </section>
             <section class="elements"></section>
@@ -31,26 +31,26 @@
         </footer>
         <div class="popup profile-popup">
             <div class="popup__container">
-                <button class="popup__button-exit popup__button-exit_profile" type="button"></button>
+                <button class="popup__button-exit popup__button-exit_profile" aria-label="exit" type="button"></button>
                 <h2 class="popup__heading">Редактировать профиль</h2>
                 <form id="EditProfile" name="editProfile" class="popup__info">
                     <div class="popup__input">
-                        <input id="name" name="name" class="popup__field popup__field_type_name" type="text"
+                        <input id="name" placeholder="Имя" name="name" class="popup__field popup__field_type_name" type="text"
                             minlength="2" maxlength="40" required>
                         <span id="form_name_input" class="popup__error name-error"></span>
                     </div>
                     <div class="popup__input">
-                        <input id="job" name="job" class="popup__field popup__field_type_job" type="text" minlength="2"
-                            maxlength="400" required>
+                        <input id="job" name="job" placeholder="О себе" class="popup__field popup__field_type_job" type="text" minlength="2"
+                            maxlength="200" required>
                         <span id="form_job_input" class="popup__error job-error"></span>
                     </div>
-                    <button type="submit" class="popup__button-save">Сохранить</button>
+                    <button type="submit" aria-label="save" class="popup__button-save">Сохранить</button>
                 </form>
             </div>
         </div>
         <div class="popup photo-popup">
             <div class="popup__container">
-                <button class="popup__button-exit popup__button-exit_card" type="button"></button>
+                <button class="popup__button-exit popup__button-exit_card" aria-label="exit" type="button"></button>
                 <h2 class="popup__heading">Новое место</h2>
                 <form id="CardProfile" name="cardProfile" class="popup__info">
                     <div class="popup__input">
@@ -64,7 +64,7 @@
                             class="popup__field popup__field_type_link" type="url" required>
                         <span id="form_link_input" class="popup__error link-error"></span>
                     </div>
-                    <button type="submit" class="popup__button-save">Создать</button>
+                    <button type="submit" aria-label="save" class="popup__button-save">Создать</button>
                 </form>
             </div>
         </div>
@@ -86,8 +86,6 @@
             </div>
         </template>
     </div>
-    <script src="scripts/validate.js" type="module"></script>
-    <script src="scripts/constants.js" type="module"></script>
     <script src="scripts/index.js" type="module"></script>
 </body>
 
