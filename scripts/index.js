@@ -28,12 +28,6 @@ const name = document.querySelector('.profile__name')
 const job = document.querySelector('.profile__job')
 
 
-// добавление новой card
-const createCard = (element) => {
-  const card = new Card(element, gridPhoto);
-  const cardElement = card.createNewCard();
-  return cardElement;
-}
 
 const activateButton = (buttonElement, obj) => {
   buttonElement.classList.remove(obj.inactiveButtonClass);
