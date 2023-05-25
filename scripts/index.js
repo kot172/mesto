@@ -1,5 +1,8 @@
-import { activateButton, disableButton } from './validate.js'
+// import { activateButton, disableButton } from './validate.js';
 import { initialCards } from './constants.js';
+import FormValidator from './FormValidator.js';
+import Card from './Card.js';
+
 const editButton = document.querySelector('.profile__edit-button') // Клавиша редактирования
 const addButton = document.querySelector('.profile__rectangle')  // Клавиша добавления
 const popupImages = document.querySelector('.images-popup');
@@ -12,9 +15,10 @@ const popupImagesParagraph = popupImages.querySelector('.popup__heading');
 const formElement = document.querySelector('.profile-popup')  // Нашел форму с именем и фамилией
 const cardPopupp = document.querySelector('.photo-popup')  // Нашел форму с добавлением картинок
 const closeButtonPlace = cardPopupp.querySelector('.popup__button-exit_card') // клавиша закрытия попапа
-const gridPhoto = document.querySelector('.elements')  // Нашли блок фото
+const gridPhoto = document.querySelector('.elements')  // Нашли блок фото 
 const photoTemplate = document.querySelector('.element_template') // Нашли card
 const likeCard = document.querySelector('.element__main-vector') // Нашли like
+const formPersonalDataElement = document.forms.editProfile
 const nameInput = document.querySelector('.popup__field_type_name')
 const jobInput = document.querySelector('.popup__field_type_job')
 const placeInput = document.querySelector('.popup__field_type_place')
@@ -22,6 +26,33 @@ const addCardsForm = document.forms['cardProfile']
 const linkInput = document.querySelector('.popup__field_type_link')
 const name = document.querySelector('.profile__name')
 const job = document.querySelector('.profile__job')
+
+
+// добавление новой card
+const createCard = (element) => {
+  const card = new Card(element, gridPhoto);
+  const cardElement = card.createNewCard();
+  return cardElement;
+}
+
+const activateButton = (buttonElement, obj) => {
+  buttonElement.classList.remove(obj.inactiveButtonClass);
+  buttonElement.removeAttribute('disabled', true);
+}
+
+const disableButton = (buttonElement, obj) => {
+  buttonElement.classList.add(obj.inactiveButtonClass);
+  buttonElement.setAttribute('disabled', true);
+}
+
+const validationConfig = {
+  formSelector: '.popup__info',
+  inputSelector: '.popup__field',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__error-active',
+  errorClass: 'popup__error_visible',
+};
 
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened')
@@ -51,52 +82,28 @@ function hidePopup(popupElement) {
 }
 
 editButton.addEventListener('click', () => {
+  formPersonalDataValidator.resetErrorForm()
   openPopup(formElement)
-  activateButton(formElement.querySelector('.popup__button-save'), { inactiveButtonClass: 'popup__button_disabled' })
   nameInput.value = name.textContent   // вставили имя
   jobInput.value = job.textContent //вставили джоб
 });
 
 addButton.addEventListener('click', () => {
   addCardsForm.reset()
+  formAddCardValidator.resetErrorForm()
   openPopup(cardPopupp)
-  disableButton(cardPopupp.querySelector('.popup__button-save'), { inactiveButtonClass: 'popup__button_disabled' })
 })
 
 closeButton.addEventListener('click', () => hidePopup(formElement));
 closeButtonPlace.addEventListener('click', () => hidePopup(cardPopupp));
 closePopupImages.addEventListener('click', () => hidePopup(popupImages));
 
-function createNewCard(card) {
-  const newEl = photoTemplate.content.querySelector('.element').cloneNode(true)
-  const imgEl = newEl.querySelector('.element__mask-group')
-  const titleEl = newEl.querySelector('.element__main-text')
-  const deleteButton = newEl.querySelector('.element__delete')
-  const likeButton = newEl.querySelector('.element__main-vector') // Клавиша лайка
-  titleEl.textContent = card.name
-  imgEl.alt = card.name
-  imgEl.src = card.link
-  document.getElementById('CardProfile').reset();
-
-  const handleDeleteImage = () => {
-    newEl.remove()
-  }
-  deleteButton.addEventListener('click', handleDeleteImage)
-
-  const handleLike = () => {
-    likeButton.classList.toggle('element__main-vector_active')
-  }
-  likeButton.addEventListener('click', handleLike);
-  imgEl.addEventListener('click', () => {
-    openPopupImage(card);
-  });
-  return newEl
-}
-
-initialCards.forEach((card) => {
-  const element = createNewCard(card)
-  gridPhoto.appendChild(element)
-})
+const openPopupImage = (card) => {
+  popupImagesContent.src = card.link;
+  popupImagesContent.alt = card.name;
+  popupImagesParagraph.textContent = card.name;
+  openPopup(popupImages);
+};
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
@@ -105,19 +112,29 @@ function handleProfileFormSubmit(evt) {
   hidePopup(formElement);
 }
 
-formElement.addEventListener('submit', handleProfileFormSubmit);
+// добавление карточки в контейнер
+function addCard(container, card) {
+  container.prepend(card);
+}
 
 cardPopupp.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const groupCard = { name: placeInput.value, link: linkInput.value }
-  const element = createNewCard(groupCard)
-  gridPhoto.prepend(element)
+  const card = new Card(groupCard, photoTemplate, openPopupImage)
+  addCard(gridPhoto, card.createNewCard())
   hidePopup(cardPopupp)
 })
 
-const openPopupImage = (card) => {
-  popupImagesContent.src = card.link;
-  popupImagesContent.alt = card.name;
-  popupImagesParagraph.textContent = card.name;
-  openPopup(popupImages);
-};
+//загрузка карт в контейнер
+initialCards.forEach(element => {
+  const card = new Card(element, photoTemplate, openPopupImage);
+  addCard(gridPhoto, card.createNewCard())
+})
+
+const formPersonalDataValidator = new FormValidator(validationConfig, formPersonalDataElement);
+formPersonalDataValidator.enableValidation()
+
+const formAddCardValidator = new FormValidator(validationConfig, addCardsForm);
+formAddCardValidator.enableValidation()
+
+formElement.addEventListener('submit', handleProfileFormSubmit);
