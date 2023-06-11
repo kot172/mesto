@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="page">
+    <header class="header">
+        <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="лого">
+    </header>
+    <main>
+        <section class="profile">
+            <img class="profile__avatar" src="<%=require('./images/profile.png')%>" alt="аватарка">
+            <div class="profile__info">
+                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <button type="button" aria-label="edit" class="profile__edit-button"></button>
+                <p class="profile__job">Исследователь океана</p>
+            </div>
+            <button type="button" aria-label="add" class="profile__rectangle"><img class="profile__rectangle-vector"
+                                                                                   src="<%=require('./images/Button.svg')%>"
+                                                                                   alt="кнопка"></button>
+        </section>
+        <section class="elements"></section>
+    </main>
+    <footer class="footer">
+        <p class="footer__info">&#169; 2020 Mesto Russia</p>
+    </footer>
+    <div class="popup profile-popup">
+        <div class="popup__container">
+            <button class="popup__button-exit popup__button-exit_profile" aria-label="exit" type="button"></button>
+            <h2 class="popup__heading">Редактировать профиль</h2>
+            <form id="EditProfile" name="editProfile" class="popup__info">
+                <div class="popup__input">
+                    <input id="name" placeholder="Имя" name="name" class="popup__field popup__field_type_name"
+                           type="text"
+                           minlength="2" maxlength="40" required>
+                    <span id="form_name_input" class="popup__error name-error"></span>
+                </div>
+                <div class="popup__input">
+                    <input id="job" name="job" placeholder="О себе" class="popup__field popup__field_type_job"
+                           type="text" minlength="2"
+                           maxlength="200" required>
+                    <span id="form_job_input" class="popup__error job-error"></span>
+                </div>
+                <button type="submit" aria-label="save" class="popup__button-save">Сохранить</button>
+            </form>
+        </div>
+    </div>
+    <div class="popup photo-popup">
+        <div class="popup__container">
+            <button class="popup__button-exit popup__button-exit_card" aria-label="exit" type="button"></button>
+            <h2 class="popup__heading">Новое место</h2>
+            <form id="CardProfile" name="cardProfile" class="popup__info">
+                <div class="popup__input">
+                    <input placeholder="Название" id="place" name="place"
+                           class="popup__field popup__field_type_place" type="text" minlength="2" maxlength="30"
+                           required>
+                    <span id="form_place_input" class="popup__error place-error"></span>
+                </div>
+                <div class="popup__input">
+                    <input placeholder="Ссылка на картинку" id="link" name="link"
+                           class="popup__field popup__field_type_link" type="url" required>
+                    <span id="form_link_input" class="popup__error link-error"></span>
+                </div>
+                <button type="submit" aria-label="save" class="popup__button-save">Создать</button>
+            </form>
+        </div>
+    </div>
+    <div class="popup images-popup">
+        <div class="popup__container popup__container_image">
+            <button class="popup__button-exit popup__button-exit_image" type="button"></button>
+            <img class="popup__image" alt="изображение">
+            <h2 class="popup__heading popup__heading_image"></h2>
+        </div>
+    </div>
+</div>
+<template class="element_template">
+    <div class="element">
+        <img class="element__mask-group" alt="Изображение">
+        <button type="button" class="element__delete"><img src="<%=require('./images/Trash.svg')%>"></button>
+
+        <div class="element__main">
+            <h2 class="element__main-text"></h2>
+            <button type="button" class="element__main-vector"> </button>
+        </div>
+    </div>
+</template>
+</body>
+</html>
