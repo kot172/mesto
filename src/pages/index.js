@@ -1,11 +1,11 @@
 // import { activateButton, disableButton } from './validate.js';
 import './index.css';
-import FormValidator from '../scripts/Components/FormValidator.js';
-import Card from '../scripts/Components/Card.js';
-import PopupWithImage from '../scripts/Components/PopupWithImage.js';
-import Section from '../scripts/Components/Section.js';
-import UserInfo from '../scripts/Components/UserInfo.js';
-import PopupWithForm from '../scripts/Components/PopupWithForm.js';
+import FormValidator from '../scripts/components/FormValidator.js';
+import Card from '../scripts/components/Card.js';
+import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import Section from '../scripts/components/Section.js';
+import UserInfo from '../scripts/components/UserInfo.js';
+import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import {
   initialCards,
   popupProfileSelector,
@@ -21,28 +21,12 @@ import {
   photoTemplate,
   formPersonalDataElement,
   addCardsForm
-} from '../scripts/Utils/constants.js';
+} from '../scripts/utils/constants.js';
 
 const userInfo = new UserInfo(configInfo);
 
 const popupImage = new PopupWithImage(popupImageSelector);
 popupImage.setEventListeners()
-
-const activateButton = (buttonElement, obj) => {
-  buttonElement.classList.remove(obj.inactiveButtonClass);
-  buttonElement.removeAttribute('disabled', true);
-}
-
-const disableButton = (buttonElement, obj) => {
-  buttonElement.classList.add(obj.inactiveButtonClass);
-  buttonElement.setAttribute('disabled', true);
-}
-
-function openPopup(popupElement) {
-  popupElement.classList.add('popup_opened')
-  popupElement.addEventListener('click', handlePopupClick);
-  document.addEventListener('keydown', handleEscPress);
-}
 
 // Открытие попап редактирование нэйма
 editButton.addEventListener('click', () => {
@@ -50,6 +34,7 @@ editButton.addEventListener('click', () => {
   popupProfile.setInputsValue(userInfo.getUserInfo())
   popupProfile.open()
 });
+
 
 //Открытие попап с добавлением карточек
 addButton.addEventListener('click', () => {
@@ -67,13 +52,13 @@ const section = new Section({
   }
 }, gridPhotoList)
 
-section.addCardFromArray()
+section.renderItems()
 
 // формы
 const popupProfile = new PopupWithForm(popupProfileSelector, (evt) => {
   evt.preventDefault();
   userInfo.setUserInfo(popupProfile.getInputValue());
-  popupProfile.popupClose();
+  popupProfile.close();
 })
 
 popupProfile.setEventListeners();
@@ -81,11 +66,10 @@ popupProfile.setEventListeners();
 const popupAddCard = new PopupWithForm(popupAddCardSelector, (evt) => {
   evt.preventDefault();
   section.addItem(section.renderer(popupAddCard.getInputValue()))
-  popupAddCard.popupClose();
+  popupAddCard.close();
 })
 
 popupAddCard.setEventListeners()
-
 
 // Запуск валидации
 const formPersonalDataValidator = new FormValidator(validationConfig, formPersonalDataElement);

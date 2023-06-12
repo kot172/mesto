@@ -18,6 +18,7 @@ export default class Card {
   // Функция удаления карточки
   _handleDeleteImage = () => {
     this._cloneElement.remove();
+    this._cloneElement = null;
   }
 
   // Показать картинку

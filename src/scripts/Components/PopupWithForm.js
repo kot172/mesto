@@ -8,6 +8,7 @@ export default class PopupWithForm extends Popup {
         this._inputList = this._form.querySelectorAll('.popup__field')
     }
 
+//собирает данные для размещения профиля
     getInputValue() {
         this._values = {};
         this._inputList.forEach(input => {
@@ -16,9 +17,9 @@ export default class PopupWithForm extends Popup {
         return this._values
     }
 
-    setInputsValue(dataUser) {
+    setInputsValue(inputValues) {
         this._inputList.forEach(input => {
-            input.value = dataUser[input.name];
+            input.value = inputValues[input.name];
         })
     }
 
@@ -28,10 +29,9 @@ export default class PopupWithForm extends Popup {
     }
 
     popupClose() {
-        super.popupClose();
+        super.close();
         this._form.reset();
     }
 
 }
 
-// 1.53
