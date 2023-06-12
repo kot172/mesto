@@ -5,7 +5,7 @@ import Card from "../scripts/components/Card.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import Section from "../scripts/components/Section.js";
 import UserInfo from "../scripts/components/UserInfo.js";
-import PopupWithForm from "../scripts/components/PopupWithForm.js";
+import PopupWithForm from "../scripts/components/PopupWithForm";
 import {
   initialCards,
   popupProfileSelector,
