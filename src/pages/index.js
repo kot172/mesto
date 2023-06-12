@@ -57,17 +57,15 @@ const section = new Section(
 section.renderItems();
 
 // формы
-const popupProfile = new PopupWithForm(popupProfileSelector, (evt) => {
-  evt.preventDefault();
-  userInfo.setUserInfo(popupProfile._getInputValue());
+const popupProfile = new PopupWithForm(popupProfileSelector, (formData) => {
+  userInfo.setUserInfo(formData);
   popupProfile.close();
 });
 
 popupProfile.setEventListeners();
 
-const popupAddCard = new PopupWithForm(popupAddCardSelector, (evt) => {
-  evt.preventDefault();
-  section.addItem(section.renderer(popupAddCard._getInputValue()));
+const popupAddCard = new PopupWithForm(popupAddCardSelector, (formData) => {
+  section.addItem(section.renderer(formData));
   popupAddCard.close();
 });
 
