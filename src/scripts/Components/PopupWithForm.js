@@ -9,7 +9,7 @@ export default class PopupWithForm extends Popup {
   }
 
   //собирает данные для размещения профиля
-  getInputValue() {
+  _getInputValue() {
     this._values = {};
     this._inputList.forEach((input) => {
       this._values[input.name] = input.value;

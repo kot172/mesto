@@ -59,7 +59,7 @@ section.renderItems();
 // формы
 const popupProfile = new PopupWithForm(popupProfileSelector, (evt) => {
   evt.preventDefault();
-  userInfo.setUserInfo(popupProfile.getInputValue());
+  userInfo.setUserInfo(popupProfile._getInputValue());
   popupProfile.close();
 });
 
@@ -67,7 +67,7 @@ popupProfile.setEventListeners();
 
 const popupAddCard = new PopupWithForm(popupAddCardSelector, (evt) => {
   evt.preventDefault();
-  section.addItem(section.renderer(popupAddCard.getInputValue()));
+  section.addItem(section.renderer(popupAddCard._getInputValue()));
   popupAddCard.close();
 });
 
