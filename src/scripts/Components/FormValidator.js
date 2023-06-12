@@ -20,7 +20,7 @@ export default class FormValidator {
     input.classList.remove(this._inputErrorClass);
     this._errorElement = this._form.querySelector(`.${input.id}-error`);
     this._errorElement.classList.remove(this._errorClass);
-    this._errorElement.textContent = '';
+    this._errorElement.textContent = "";
   }
 
   _activateButton() {
@@ -34,40 +34,44 @@ export default class FormValidator {
   }
 
   _hasIvalidInput() {
-    return Array.from(this._inputList).every(input => input.validity.valid);
+    return Array.from(this._inputList).every((input) => input.validity.valid);
   }
 
   _toggleButtonState() {
-    this._hasIvalidInput() ? this._activateButton() : this._disableButton(this._submitBtn);
-
+    this._hasIvalidInput()
+      ? this._activateButton()
+      : this._disableButton(this._submitBtn);
   }
 
   _checkValidity(input) {
     const errorElement = this._form.querySelector(`.${input.id}-error`);
-    input.validity.valid ? this._hideInputError(errorElement, input) : this._showInputError(errorElement, input);
+    input.validity.valid
+      ? this._hideInputError(errorElement, input)
+      : this._showInputError(errorElement, input);
   }
 
   _setEventListener() {
-    this._inputList.forEach(input => {
-      input.addEventListener('input', () => {
+    this._inputList.forEach((input) => {
+      input.addEventListener("input", () => {
         this._checkValidity(input);
         this._toggleButtonState();
-      })
-    })
+      });
+    });
   }
 
   enableValidation() {
-
     this._setEventListener();
   }
 
   resetErrorForm() {
-    this._inputList.forEach(input => {
-      const errorElement = this._form.querySelector(`${this._inputErrorClass}${input.name}`)
+    this._inputList.forEach((input) => {
+      const errorElement = this._form.querySelector(
+        `${this._inputErrorClass}${input.name}`
+      );
       if (!input.validity.valid) {
         this._hideInputError(errorElement, input);
       }
-    })
-    this._disableButton()
+    });
+    this._disableButton();
   }
 }

@@ -1,11 +1,11 @@
 // import { activateButton, disableButton } from './validate.js';
-import './index.css';
-import FormValidator from '../scripts/components/FormValidator.js';
-import Card from '../scripts/components/Card.js';
-import PopupWithImage from '../scripts/components/PopupWithImage.js';
-import Section from '../scripts/components/Section.js';
-import UserInfo from '../scripts/components/UserInfo.js';
-import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import "./index.css";
+import FormValidator from "../scripts/components/FormValidator.js";
+import Card from "../scripts/components/Card.js";
+import PopupWithImage from "../scripts/components/PopupWithImage.js";
+import Section from "../scripts/components/Section.js";
+import UserInfo from "../scripts/components/UserInfo.js";
+import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import {
   initialCards,
   popupProfileSelector,
@@ -20,62 +20,67 @@ import {
   cardPopupp,
   photoTemplate,
   formPersonalDataElement,
-  addCardsForm
-} from '../scripts/utils/constants.js';
+  addCardsForm,
+} from "../scripts/utils/constants.js";
 
 const userInfo = new UserInfo(configInfo);
 
 const popupImage = new PopupWithImage(popupImageSelector);
-popupImage.setEventListeners()
+popupImage.setEventListeners();
 
 // Открытие попап редактирование нэйма
-editButton.addEventListener('click', () => {
-  formPersonalDataValidator.resetErrorForm()
-  popupProfile.setInputsValue(userInfo.getUserInfo())
-  popupProfile.open()
+editButton.addEventListener("click", () => {
+  formPersonalDataValidator.resetErrorForm();
+  popupProfile.setInputsValue(userInfo.getUserInfo());
+  popupProfile.open();
 });
 
-
 //Открытие попап с добавлением карточек
-addButton.addEventListener('click', () => {
-  addCardsForm.reset()
-  formAddCardValidator.resetErrorForm()
-  popupAddCard.open()
-})
+addButton.addEventListener("click", () => {
+  addCardsForm.reset();
+  formAddCardValidator.resetErrorForm();
+  popupAddCard.open();
+});
 
 // отрисовываем элементы на стр
-const section = new Section({
-  items: initialCards,
-  renderer: (element) => {
-    const card = new Card(element, photoTemplate, popupImage.open)
-    return card.createNewCard()
-  }
-}, gridPhotoList)
+const section = new Section(
+  {
+    items: initialCards,
+    renderer: (element) => {
+      const card = new Card(element, photoTemplate, popupImage.open);
+      return card.createNewCard();
+    },
+  },
+  gridPhotoList
+);
 
-section.renderItems()
+section.renderItems();
 
 // формы
 const popupProfile = new PopupWithForm(popupProfileSelector, (evt) => {
   evt.preventDefault();
   userInfo.setUserInfo(popupProfile.getInputValue());
   popupProfile.close();
-})
+});
 
 popupProfile.setEventListeners();
 
 const popupAddCard = new PopupWithForm(popupAddCardSelector, (evt) => {
   evt.preventDefault();
-  section.addItem(section.renderer(popupAddCard.getInputValue()))
+  section.addItem(section.renderer(popupAddCard.getInputValue()));
   popupAddCard.close();
-})
+});
 
-popupAddCard.setEventListeners()
+popupAddCard.setEventListeners();
 
 // Запуск валидации
-const formPersonalDataValidator = new FormValidator(validationConfig, formPersonalDataElement);
-formPersonalDataValidator.enableValidation()
+const formPersonalDataValidator = new FormValidator(
+  validationConfig,
+  formPersonalDataElement
+);
+formPersonalDataValidator.enableValidation();
 
 const formAddCardValidator = new FormValidator(validationConfig, addCardsForm);
-formAddCardValidator.enableValidation()
+formAddCardValidator.enableValidation();
 
 // formElement.addEventListener('submit', handleProfileFormSubmit);
