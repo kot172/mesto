@@ -21,12 +21,4 @@ export default class UserInfo {
     this._profileAvatar.src = avatar;
     
   }
-
 }
-
-
-// setUserInfo(dataUser) {
-  // this._profileAvatar.src = dataUser.avatar;
-  // this._profileName.textContent = dataUser.name;
-  // this._profileJob.textContent = dataUser.job;
-// }

@@ -63,9 +63,9 @@ export default class Card {
   }
 
   _changeVisibleForDelete() {
-    this._myId === this._ownerId
-      ? (this._deleteButton.style.display = "block")
-      : (this._deleteButton.style.display = "none");
+      if ( this._myId !== this._ownerId) {
+        this._deleteButton.remove();
+      }
   }
 
   _checkCountLike() {

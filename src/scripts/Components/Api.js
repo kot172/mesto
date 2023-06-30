@@ -13,18 +13,6 @@ export default class Api {
     }
   }
 
-  getInitialCards() {
-    return fetch(`${this._url}/cards`, {
-      headers: {
-        authorization: this._authorization,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
-  }
-
   getInfo() {
     return fetch(`${this._url}/users/me`, {
       headers: {
@@ -82,7 +70,6 @@ export default class Api {
     }).then(this._checkResponse);
   }
 
-  deleteCard(formData) {}
   addLike(cardId) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: "PUT",

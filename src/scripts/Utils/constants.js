@@ -57,6 +57,7 @@ const cardPopupp = document.querySelector(".photo-popup"); // Нашел фор�
 const photoTemplate = document.querySelector(".element_template"); // Нашли card
 const formPersonalDataElement = document.forms.editProfile;
 const addCardsForm = document.forms["cardProfile"];
+const editAvatar = document.forms["AvatarProfile"];
 
 export {
   initialCards,
@@ -76,5 +77,6 @@ export {
   editBtnAvatar,
   popupAvatar,
   userId,
-  popupDelete
+  popupDelete,
+  editAvatar,
 };

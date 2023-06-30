@@ -12,10 +12,3 @@ export default class Section {
     this._container.append(elementDom);
   }
 }
-
-
-
-// renderItems(items) {
-  // this._items.forEach((element) => {
-    // this.addItem(this.renderer(element));
-  // });

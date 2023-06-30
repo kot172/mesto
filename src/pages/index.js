@@ -25,10 +25,11 @@ import {
   addCardsForm,
   editBtnAvatar,
   popupAvatar,
-  userId,
   popupDelete,
+  editAvatar,
 } from "../scripts/utils/constants.js";
 
+let userId;
 const userInfo = new UserInfo(configInfo);
 
 const popupImage = new PopupWithImage(popupImageSelector);
@@ -50,13 +51,24 @@ editButton.addEventListener("click", () => {
 });
 
 editBtnAvatar.addEventListener("click", () => {
+  formAvatarValidator.resetErrorForm();
   popupAvatarEdit.open();
 });
 
 const popupAvatarEdit = new PopupWithForm(popupAvatar, (formData) => {
-  api.editUserAvatar(formData.avatar);
-  userInfo.setUserAvatar(formData.avatar);
-  popupAvatarEdit.close();
+  popupAvatarEdit.renderLoading(true);
+  api
+    .editUserAvatar(formData.avatar)
+    .then((res) => {
+      userInfo.setUserAvatar({
+        username: res.name,
+        job: res.about,
+        avatar: res.avatar,
+      });
+      popupAvatarEdit.close();
+    })
+    .catch((err) => console.log(`Что-то пошло не так: ${err}`))
+    .finally(() => popupAvatarEdit.renderLoading(false));
 });
 
 popupAvatarEdit.setEventListeners();
@@ -68,53 +80,60 @@ addButton.addEventListener("click", () => {
   popupAddCard.open();
 });
 
+function createCard(element) {
+  const card = new Card(
+    element,
+    photoTemplate,
+    popupImage.open,
+    (likeElement, cardId) => {
+      if (likeElement.classList.contains("element__main-vector_active")) {
+        api
+          .deleteLike(element._id)
+          .then((res) => {
+            card.toggleLike(res.likes);
+          })
+          .catch((error) => console.error(`ошибка при снятии лайка ${error}`));
+      } else {
+        api
+          .addLike(element._id)
+          .then((res) => {
+
+            card.toggleLike(res.likes);
+          })
+          .catch((error) =>
+            console.error(`ошибка при добавлении лайка ${error}`)
+          );
+      }
+    },
+    userId,
+    popupDeleteCard.open
+  );
+  return card.createNewCard();
+}
+
 // отрисовываем элементы на стр
 const section = new Section(
   {
     items: initialCards,
-    renderer: (element) => {
-      const card = new Card(
-        element,
-        photoTemplate,
-        popupImage.open,
-        (likeElement, cardId) => {
-          if (likeElement.classList.contains("element__main-vector_active")) {
-            api
-              .deleteLike(element._id)
-              .then((res) => {
-                console.log(res);
-                card.toggleLike(res.likes);
-              })
-              .catch((error) =>
-                console.error(`ошибка при снятии лайка ${error}`)
-              );
-          } else {
-            api
-              .addLike(element._id)
-              .then((res) => {
-                console.log(res);
-
-                card.toggleLike(res.likes);
-              })
-              .catch((error) =>
-                console.error(`ошибка при добавлении лайка ${error}`)
-              );
-          }
-        },
-        userId,
-        popupDeleteCard.open
-      );
-      return card.createNewCard();
-    },
+    renderer: (element) => createCard(element)
   },
   gridPhotoList
 );
 
 // формы
 const popupProfile = new PopupWithForm(popupProfileSelector, (formData) => {
-  userInfo.setUserInfo(formData);
-  api.editUserInfo(formData);
+  popupProfile.renderLoading(true);
+  api.editUserInfo(formData)
+  .then(res => {
+    userInfo.setUserInfo({
+    name: res.name, 
+      job: res.about, 
+      avatar: res.avatar });
+  
   popupProfile.close();
+})
+.catch(err => console.log(`Что-то пошло не так: ${err}`))
+  .finally(() => popupProfile.renderLoading(false));
 });
 
 popupProfile.setEventListeners();
@@ -138,29 +157,31 @@ const popupDeleteCard = new PopupWithDelete(
 popupDeleteCard.setEventListeners();
 
 const popupAddCard = new PopupWithForm(popupAddCardSelector, (formData) => {
-  Promise.all([api.getInfo(), api.addCard(formData)]).then(
-    ([dataUser, dataCard]) => {
-      dataCard.myid = dataUser._id;
+  api.addCard(formData)
+    .then((dataCard) => {
+      dataCard.myid = userId;
       section.addItem(section.renderer(dataCard));
       popupAddCard.close();
-    }
-  );
+    })
+    .catch((err) => console.log(`Что-то пошло не так: ${err}`))
+    .finally(() => popupAddCard.renderLoading(false));
 });
 
 popupAddCard.setEventListeners();
 
 // Запуск валидации
-const formPersonalDataValidator = new FormValidator(
-  validationConfig,
-  formPersonalDataElement
-);
+const formPersonalDataValidator = new FormValidator(validationConfig, formPersonalDataElement);
 formPersonalDataValidator.enableValidation();
+
+const formAvatarValidator = new FormValidator(validationConfig, editAvatar);
+formAvatarValidator.enableValidation();
 
 const formAddCardValidator = new FormValidator(validationConfig, addCardsForm);
 formAddCardValidator.enableValidation();
 
 Promise.all([api.getInfo(), api.getCards()]).then(([dataUser, dataCard]) => {
   dataCard.forEach((element) => (element.myid = dataUser._id));
+  userId = dataUser._id;
   userInfo.setUserInfo({
     name: dataUser.name,
     job: dataUser.about,
