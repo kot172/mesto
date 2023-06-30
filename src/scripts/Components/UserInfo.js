@@ -2,6 +2,7 @@ export default class UserInfo {
   constructor(configInfo) {
     this._profileName = document.querySelector(configInfo.name);
     this._profileJob = document.querySelector(configInfo.job);
+    this._profileAvatar = document.querySelector(configInfo.avatar);
   }
 
   getUserInfo() {
@@ -11,8 +12,21 @@ export default class UserInfo {
     };
   }
 
-  setUserInfo(dataUser) {
-    this._profileName.textContent = dataUser.name;
-    this._profileJob.textContent = dataUser.job;
+  setUserInfo({name, job, avatar}) {
+    this._profileName.textContent = name;
+    this._profileJob.textContent = job;
   }
+
+  setUserAvatar(avatar) {
+    this._profileAvatar.src = avatar;
+    
+  }
+
 }
+
+
+// setUserInfo(dataUser) {
+  // this._profileAvatar.src = dataUser.avatar;
+  // this._profileName.textContent = dataUser.name;
+  // this._profileJob.textContent = dataUser.job;
+// }

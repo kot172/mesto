@@ -29,10 +29,15 @@ const popupProfileSelector = ".profile-popup";
 const popupAddCardSelector = ".photo-popup";
 const popupImageSelector = ".images-popup";
 const gridPhotoList = ".elements";
+const popupAvatar = ".avatar-popup";
+const popupDelete = ".delete-popup"
+const userId = "322e5216bbc96ee2ee0cb16b"
+
 
 const configInfo = {
   name: ".profile__name",
   job: ".profile__job",
+  avatar: ".profile__avatar",
 };
 
 const validationConfig = {
@@ -45,6 +50,7 @@ const validationConfig = {
 };
 
 const editButton = document.querySelector(".profile__edit-button"); // Клавиша редактирования
+const editBtnAvatar = document.querySelector(".profile__avatar-edit"); // Клавиша ред.аватара
 const addButton = document.querySelector(".profile__rectangle"); // Клавиша добавления
 const popupImages = document.querySelector(".images-popup");
 const cardPopupp = document.querySelector(".photo-popup"); // Нашел форму с добавлением картинок
@@ -67,4 +73,8 @@ export {
   photoTemplate,
   formPersonalDataElement,
   addCardsForm,
+  editBtnAvatar,
+  popupAvatar,
+  userId,
+  popupDelete
 };
