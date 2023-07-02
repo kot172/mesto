@@ -7,6 +7,8 @@ export default class PopupWithForm extends Popup {
     this._form = this._popup.querySelector(".popup__info");
     this._inputList = this._form.querySelectorAll(".popup__field");
     this._submitBtn = this._form.querySelector('.popup__button-save');
+    this._defaultSubmitText = this._submitBtn.textContent;
+
   }
 
   //собирает данные для размещения профиля
@@ -26,9 +28,9 @@ export default class PopupWithForm extends Popup {
 
   renderLoading(isLoading){
     if (isLoading) {
-      this._submitBtn.value = `${this._submitBtn.value}...`;
+      this._submitBtn.textContent = 'Сохранение...';
     } else {
-      this._submitBtn.value = this._defaultSubmitText;
+      this._submitBtn.textContent = this._defaultSubmitText;
     }
   }
 

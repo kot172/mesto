@@ -57,14 +57,9 @@ editBtnAvatar.addEventListener("click", () => {
 
 const popupAvatarEdit = new PopupWithForm(popupAvatar, (formData) => {
   popupAvatarEdit.renderLoading(true);
-  api
-    .editUserAvatar(formData.avatar)
+  api.editUserAvatar(formData.avatar)
     .then((res) => {
-      userInfo.setUserAvatar({
-        username: res.name,
-        job: res.about,
-        avatar: res.avatar,
-      });
+      userInfo.setUserAvatar(formData.avatar);
       popupAvatarEdit.close();
     })
     .catch((err) => console.log(`Что-то пошло не так: ${err}`))
@@ -138,12 +133,9 @@ const popupProfile = new PopupWithForm(popupProfileSelector, (formData) => {
 
 popupProfile.setEventListeners();
 
-const popupDeleteCard = new PopupWithDelete(
-  ".delete-popup",
-  ({ card, cardId }) => {
+const popupDeleteCard = new PopupWithDelete(".delete-popup",({ card, cardId }) => {
     popupDeleteCard.renderLoading(true);
-    api
-      .deleteCard(cardId)
+    api.deleteCard(cardId)
       .then(() => {
         card.removeCard();
         popupDeleteCard.close();
@@ -157,6 +149,7 @@ const popupDeleteCard = new PopupWithDelete(
 popupDeleteCard.setEventListeners();
 
 const popupAddCard = new PopupWithForm(popupAddCardSelector, (formData) => {
+  popupAddCard.renderLoading(true);
   api.addCard(formData)
     .then((dataCard) => {
       dataCard.myid = userId;
@@ -189,4 +182,5 @@ Promise.all([api.getInfo(), api.getCards()]).then(([dataUser, dataCard]) => {
   });
   userInfo.setUserAvatar(dataUser.avatar);
   section.renderItems(dataCard);
-});
+})
+.catch(err => console.log(`Что-то пошло не так: ${err}`));

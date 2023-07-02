@@ -9,6 +9,6 @@ export default class Section {
      items.forEach((item) => this.addItem(this.renderer(item)))    
   }
   addItem(elementDom) {
-    this._container.append(elementDom);
+    this._container.prepend(elementDom);
   }
 }
